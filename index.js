@@ -20,14 +20,14 @@ app.use(express.urlencoded({extended:true}))
 app.use(methodOverride("_method"))
 
 // Serving Static Files
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname,"public")))
 
 // DB
 const {
     connectToDb,getDb
 } = require("./db")
 
-
+app.use(express.json());
 
 
 
@@ -36,6 +36,9 @@ const {
 // ROuters
 const adminROuter = require("./routers/admin")
 app.use("/admin",adminROuter)
+
+const userRouter = require("./routers/users")
+app.use("/user",userRouter)
 
 
 app.get("/",(req,res)=>{
