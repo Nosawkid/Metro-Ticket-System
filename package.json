@@ -1,0 +1,19 @@
+{
+  "name": "metro-ticket-system",
+  "version": "1.0.0",
+  "description": "A simple app to book ticket in Metro rail",
+  "main": "index.js",
+  "scripts": {
+    "start":"nodemon index.js"
+  },
+  "author": "Yaseen Sidhik",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.19.2",
+    "method-override": "^3.0.0",
+    "mongodb": "^6.5.0"
+  }
+}

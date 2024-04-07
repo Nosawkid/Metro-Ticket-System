@@ -1,0 +1,99 @@
+<% layout("./layouts/boilerplate") %>
+
+
+    <h1>Add Stations</h1>
+
+    <form action="/admin/stations" method="post">
+        <div class="form-group">
+            <label for="station-name">Enter Station Name</label>
+            <input type="text" class="form-control" id="station-name" name="stationName">
+            <label for="station-name">Enter Station Distance from Souce</label>
+            <input type="text" class="form-control" id="station-distance" name="stationDistance">
+        </div>
+        <button class="btn btn-primary mt-2">Add Station</button>
+    </form>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col">SI No</th>
+                        <th class="col">Station Name</th>
+                        <th class="col">Station Distance</th>
+                        <th class="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% stations.forEach((station,index)=>{ %>
+                        <tr>
+                            <th scope="row">
+                                <%= index + 1 %>
+                            </th>
+                            <td>
+                                <%= station.stationName %>
+                            </td>
+                            <td>
+                                <%= station.stationDistance %>
+                            </td>
+                            <td>
+                                <form class="d-inline" action="/admin/stations/<%= station._id %>?_method=DELETE" method="post">
+                                    <button class="btn btn-danger">Delete</button>
+                                    </form>
+
+
+                                    <!-- Button trigger modal -->
+                                    <button onclick="loadDoc('<%= station._id %>')" type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop_<%= station._id %>">
+
+                                        Edit
+                                    </button>
+                                    
+                                    <div class="modal fade" id="staticBackdrop_<%= station._id %>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div id="modal-body" class="modal-body">
+                                                <form  action="/admin/stations/<%= station._id %>/edit?_method=PUT" method="post" id="editform">
+                                                    <input type="text" id="stationName_<%= station._id %>" name="stationName">
+
+                                                  
+                                                    <button type="submit">Submit</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    
+                                 
+                                
+                            </td>
+                        </tr>
+
+                        <% }) %>
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+ 
+
+
+<script src="/stations.js"></script>
